@@ -67,7 +67,7 @@ Everything in the skill hangs off one five-step loop:
 1. **SEE** — read heatmaps, scroll maps, replays and page analytics *before* proposing anything. Let behaviour choose the lever. Nobody reaches the CTA? Test position, not wording.
 2. **FIND** — generate hypotheses, score them with ICE (Impact · Confidence · Ease), match boldness to traffic. One hypothesis per test — not one element.
 3. **BUILD** — pick the simplest test mode that expresses the hypothesis; set the goal as close to revenue as you can measure; QA the variation; exclude admins.
-4. **PROVE** — real humans vote. Bayesian by default, bandit when losing traffic is expensive. Never call it early. Never edit a live test.
+4. **PROVE** — real humans vote. Bayesian by default, bandit when losing traffic is expensive. Call a winner only above 90% confidence — ideally 95%. Never edit a live test.
 5. **KEEP** — winner becomes the baseline. Original wins? That's a constraint learned, not a failure. Inconclusive? Valid result. Then back to SEE from the new baseline.
 
 ---
@@ -82,7 +82,7 @@ The skill is opinionated about four things.
 
 **How to measure.** A strict goal hierarchy: revenue / order value → completed conversion → qualified lead → purchase intent → engagement. *A CTA click is not a sale.* If the purchase can be tracked, track the purchase — including cross-domain when the checkout lives somewhere else. Sub-goals explain *why*: clicks up 40% with purchases down 8% means the page over-promised.
 
-**How not to fool yourself.** Don't call a winner because one version is ahead today. Don't treat an emergency rollback as a result. Don't run tiny tests on low-traffic pages — under ~100 conversions a month, only bold hypotheses can reach an answer. Don't re-run a disproved idea in a different colour.
+**How not to fool yourself.** Don't call a winner until AB Split Test's confidence is over 90% — ideally 95% — however far ahead one version looks today. Don't treat an emergency rollback as a result. Don't run tiny tests on low-traffic pages — only bold hypotheses reach confidence there. Don't re-run a disproved idea in a different colour.
 
 The full skill is ~1,900 words and reads in five minutes: [`skills/ab-split-test/SKILL.md`](skills/ab-split-test/SKILL.md).
 
@@ -126,14 +126,14 @@ BUILD  mode: magic. Primary goal: completed booking. Sub-goals: CTA click,
        form start. Audience: logged-out + customers, admins excluded.
        QA with ?abhash=1 on desktop + mobile. create-test → active.
 
-PROVE  Day 9: bookings +22% at decision threshold. Clicks +40%, form starts
+PROVE  Day 9: bookings +22% at 96% confidence. Clicks +40%, form starts
        +31% — intermediate and final metrics agree, no over-promise.
 
 KEEP   Variation becomes baseline. Learned: earlier price clarity beat more
        persuasive copy. Back to SEE — next bottleneck is probably the offer.
 ```
 
-The owner gets: *"The price-led hero increased completed bookings ~22% and crossed the decision threshold after 9 days."* Not a posterior probability.
+The owner gets: *"The price-led hero increased completed bookings ~22% with 96% confidence after 9 days."* Not a wall of statistics.
 
 ---
 
@@ -162,13 +162,13 @@ The MCP server runs on a WordPress install, but that install can act as a split-
 The plugin handles cache purging (WP Rocket, LiteSpeed, Autoptimize, Cloudflare, Bunny), sets canonical tags on variations, and serves full-page tests server-side or at the Cloudflare edge for zero flicker. The skill tells the agent *not* to touch caching itself.
 
 **What if the site doesn't have much traffic?**
-The skill's rule: under roughly 100 conversions a month on a page, test only bold differences. Two nearly identical variations will never reach an answer on a small site — that's a test-design problem, not a traffic problem. Heatmaps and the CRO audit still work at any traffic level.
+The skill's rule: on low-traffic pages, test only bold differences. Two nearly identical variations will rarely reach 90% confidence on a small site — that's a test-design problem, not a traffic problem. Heatmaps and the CRO audit still work at any traffic level.
 
 **Can the agent deploy winners on its own?**
 For low-risk content tests (headline, CTA text, section order) yes, if auto-complete is enabled. For price, checkout, forms, payment logic or legally meaningful claims, the skill defaults to owner review.
 
-**Is the ~100 conversions number scientific?**
-It's a practical threshold, not a theorem. Adjust it in the skill if your experience differs — and open a PR if you have a better rule.
+**When does the agent call a winner?**
+When AB Split Test reports over 90% confidence — ideally 95% — and the test has run at least a full week. Until then it keeps collecting, stops the test, or redesigns for a bolder difference. It never just picks whichever version is ahead.
 
 ---
 

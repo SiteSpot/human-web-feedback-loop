@@ -53,7 +53,7 @@ When unsure, weigh downside, upside, traffic available, page importance, and whe
 
 Record the scores and reasoning in the test description. **Don't run a low-impact test because it's easy** — traffic spent proving something trivial can't prove something important.
 
-**Match boldness to traffic.** High conversion volume: subtle tests are fine. Medium: one meaningful hypothesis. **Under ~100 conversions/month on the page: only bold hypotheses** — a different promise, offer, structure, or whole-page concept. Boldness means *expected difference in visitor behaviour*, not visual extremity. Two barely-different versions will never reach an answer; that's a design problem, not a traffic problem.
+**Match boldness to traffic.** High conversion volume: subtle tests are fine. Medium: one meaningful hypothesis. **Low traffic: only bold hypotheses** — a different promise, offer, structure, or whole-page concept. Boldness means *expected difference in visitor behaviour*, not visual extremity. Two barely-different versions may never reach 90% confidence; that's a design problem, not a traffic problem.
 
 **One hypothesis per test — not one element.** A hypothesis like *"price and the booking action are hidden too far down; surfacing both above the fold will lift completed bookings"* may legitimately change the headline, a supporting line, price framing, the CTA, and section order together, because they all express one claim. What you must not do is bundle unrelated claims (new headline + lower price + testimonials + green button) — a win teaches you nothing about why. A full-page redesign can itself be the hypothesis.
 
@@ -104,9 +104,9 @@ Default **Bayesian, even split**. Use **multi-armed bandit (Thompson sampling)**
 
 Poll `get-test-results` daily; hourly for bandit tests on checkout or time-sensitive campaigns.
 
-**Don't call a winner because** one version is ahead today, the result looks obvious, or anyone prefers the variation. Use the plugin's probability-to-beat / decision threshold. If it says not enough data, the options are: keep collecting, stop because it isn't worth more traffic, or redesign for a bolder difference. **Never "pick the one that's ahead." Never reinterpret noise as learning.**
+**Don't call a winner because** one version is ahead today, the result looks obvious, or anyone prefers the variation. AB Split Test reports the confidence for you — use it. **Declare a winner only when confidence is above 90%, ideally 95%.** Below that, the options are: keep collecting, stop because it isn't worth more traffic, or redesign for a bolder difference. **Never "pick the one that's ahead." Never reinterpret noise as learning.**
 
-Run at least one full weekly cycle even if the threshold arrives sooner. A threshold hit very fast should be sanity-checked against traffic quality, tracking, sample size, day-of-week, campaign changes, and technical issues.
+Run at least one full weekly cycle even if confidence gets there sooner. Confidence that climbs very fast should be sanity-checked against traffic quality, tracking, sample size, day-of-week, campaign changes, and technical issues.
 
 **Don't edit an active variation.** If the hypothesis must change materially: stop, record what happened, create a new test.
 
@@ -134,12 +134,12 @@ Run at least one full weekly cycle even if the threshold arrives sooner. A thres
 - Don't create tests for trivial changes because testing is available.
 - Don't overlap independent tests on one page/audience.
 - Don't optimise for clicks when a deeper conversion is measurable; don't confuse engagement with business success.
-- Don't call winners early; don't treat an emergency pause as a result; don't edit active tests.
+- Don't call winners below 90% confidence (aim for 95%); don't treat an emergency pause as a result; don't edit active tests.
 - Don't run tiny tests on low-traffic pages.
 - Don't touch caching yourself — the plugin purges WP Rocket, LiteSpeed, Autoptimize, Cloudflare, Bunny. If visitors aren't being recorded, check `get-settings` (cache/debug) before assuming the test is broken.
 - Respect the plan's test limits (Lite: 1 site / 1 test / 1 variation).
 - Record what was learned from wins, losses, and inconclusives.
-- **Report in the owner's language:** *"The price-led hero increased completed bookings ~18% and crossed the decision threshold after 12 days"* — not posterior probabilities and observation counts. Add technical detail only when it helps.
+- **Report in the owner's language:** *"The price-led hero increased completed bookings ~18% with 95% confidence after 12 days"* — not posterior probabilities and observation counts. Add technical detail only when it helps.
 
 ---
 
@@ -150,7 +150,7 @@ Run at least one full weekly cycle even if the threshold arrives sooner. A thres
 | `absplittest/list-tests` | Active/completed tests; avoid collisions and repeats. |
 | `absplittest/create-test` | Mode, pages, variations, goals, audience, hypothesis, settings. |
 | `absplittest/get-test-details` | Inspect a test's configuration. |
-| `absplittest/get-test-results` | Conversions, rates, probability-to-beat, time remaining. |
+| `absplittest/get-test-results` | Conversions, rates, confidence, time remaining. |
 | `absplittest/update-test-status` | `active` / `paused` / `complete` / `archived`. |
 | `absplittest/update-test-settings` | Allocation, goals, dates, statistics mode. |
 | `absplittest/list-audiences` · `get-audience` · `create-audience` · `update-audience` · `delete-audience` | Role, referrer, device, URL-param, ad-platform, AI-assistant-source targeting. |
@@ -168,6 +168,6 @@ Run at least one full weekly cycle even if the threshold arrives sooner. A thres
 
 **BUILD.** Mode `magic`. One hypothesis, several connected elements: price line above the fold, primary CTA beside it, rest unchanged. Primary goal: completed booking (form integration → thank-you page). Sub-goals: CTA click, form start. Audience: logged-out + customers; admins excluded. QA via `?abhash=1` on desktop and mobile; booking flow and tracking confirmed. `create-test` → `active`.
 
-**PROVE.** Daily checks. After 9 days: completed bookings +22% at the configured threshold; CTA clicks +40%; form starts +31%. Intermediate and final metrics agree — the page didn't over-promise.
+**PROVE.** Daily checks. After 9 days: completed bookings +22% at 96% confidence; CTA clicks +40%; form starts +31%. Intermediate and final metrics agree — the page didn't over-promise.
 
 **KEEP.** Variation becomes the baseline. Archived with the learning: *earlier price clarity beat more persuasive copy.* Back to SEE on the new page — the next bottleneck is probably offer framing or checkout friction. Round two starts from what's proven.
