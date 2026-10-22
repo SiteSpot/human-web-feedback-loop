@@ -1,0 +1,13 @@
+{
+  "name": "human-web-feedback-loop",
+  "version": "2.0.0",
+  "description": "Make A/B testing a natural part of how AI agents build websites: prove material changes on real visitors instead of shipping guesses, and run the SEE → FIND → BUILD → PROVE → KEEP optimisation loop when asked.",
+  "author": {
+    "name": "AB Split Test",
+    "url": "https://absplittest.com"
+  },
+  "homepage": "https://github.com/SiteSpot/human-web-feedback-loop",
+  "repository": "https://github.com/SiteSpot/human-web-feedback-loop",
+  "license": "MIT",
+  "keywords": ["ab-testing", "split-testing", "cro", "conversion", "experimentation", "optimisation", "mcp"]
+}

@@ -2,184 +2,147 @@
 
 # human-web-feedback-loop
 
-**AI has opinions. Humans have proof.**
+**Don't just make website changes. Prove they're improvements.**
 
-An agent skill that stops AI-built websites from shipping guesses — every material change gets split tested on real visitors, winners become the new baseline, and the agent learns instead of overwriting.
+Agent skills that make A/B testing a normal part of how AI coding agents build websites. When your agent rewrites a headline, redesigns a landing page or reworks a checkout, it keeps the current version live and tests its version against it, instead of overwriting something that works with something it merely believes will work better.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skill](https://img.shields.io/badge/type-agent%20skill-38d7d3)](skills/ab-split-test/SKILL.md)
+[![Skills](https://img.shields.io/badge/type-agent%20skills-38d7d3)](skills/)
 [![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%7C%20any%20MCP%20client-365187)](#install)
-[![Powered by](https://img.shields.io/badge/powered%20by-AB%20Split%20Test-365187)](https://absplittest.com)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-[Install](#install) · [Why](#why-this-exists) · [The loop](#the-proof-loop) · [What it does](#what-the-agent-actually-does) · [Example](#example) · [FAQ](#faq)
+[Install](#install) · [What changes](#what-changes-when-its-installed) · [The two skills](#the-two-skills) · [Testing tools](#testing-tools) · [FAQ](#faq)
 
 </div>
 
 ---
 
-## TL;DR
+## Why
 
-```bash
-# Claude Code / any skills-folder agent
-git clone https://github.com/SiteSpot/human-web-feedback-loop.git
-cp -r human-web-feedback-loop/skills/ab-split-test ~/.claude/skills/
-```
+AI agents now write the copy, build the pages and restructure the funnels. They're confident and fast, and they have no idea whether the result converts better or worse than what it replaced. Neither does anyone else, until real visitors have seen both.
 
-Then point your agent at a site running [AB Split Test](https://absplittest.com) (free tier works) and build like normal. The next time it changes a headline, an offer, a checkout or a landing page, it will **test the change on real traffic instead of publishing it**, wait for a statistically real answer, keep the winner, and record what it learned.
-
-Thirty seconds to install. Every page your agent builds from then on gets proven before it gets trusted.
-
----
-
-## Why this exists
-
-Agents are now writing the copy, building the pages, restructuring the funnels. They do it confidently. They do it fast. And then they set it free on the web — with no idea whether it works.
-
-That's not an AI problem. It's a *feedback* problem. A model can be an expert at copywriting and page speed and still be wrong for *your* audience, because every audience is different. Nobody — human or model — gets it right the first time. The only way to know what works on your page with your people is to try different things on your page with your people, and let them tell you.
-
-Split testing is that feedback loop. This skill wires it into your agent so the loop closes automatically.
-
-| Without this skill | With this skill |
-|---|---|
-| Agent rewrites the hero and publishes it | Agent rewrites the hero and **tests it against the original** |
-| "Looks better" is the success criterion | **Completed bookings / revenue** is the success criterion |
-| Yesterday's guess replaced by today's guess | Winner becomes the baseline; **next test starts from proof** |
-| Losing changes go live and quietly cost money | Losing variations **pause and roll back**; the loss is recorded as a learned constraint |
-| Agent optimises clicks because clicks are easy | Agent measures the goal **closest to revenue** it can reach |
-
----
-
-## The Proof Loop
-
-Everything in the skill hangs off one five-step loop:
-
-```
-        ┌──────────────────────────────────────────────┐
-        │                                              │
-        ▼                                              │
-      SEE ──────► FIND ──────► BUILD ──────► PROVE ──► KEEP
-   heatmaps,    highest-ICE   one hypothesis,  real       winner = new
-   replays,     hypothesis,   right mode,      visitors,  baseline; loss =
-   analytics    bold enough   goal ≈ revenue   Bayesian   learned constraint
-```
-
-1. **SEE** — read heatmaps, scroll maps, replays and page analytics *before* proposing anything. Let behaviour choose the lever. Nobody reaches the CTA? Test position, not wording.
-2. **FIND** — generate hypotheses, score them with ICE (Impact · Confidence · Ease), match boldness to traffic. One hypothesis per test — not one element.
-3. **BUILD** — pick the simplest test mode that expresses the hypothesis; set the goal as close to revenue as you can measure; QA the variation; exclude admins.
-4. **PROVE** — real humans vote. Bayesian by default, bandit when losing traffic is expensive. Call a winner only above 90% confidence — ideally 95%. Never edit a live test.
-5. **KEEP** — winner becomes the baseline. Original wins? That's a constraint learned, not a failure. Inconclusive? Valid result. Then back to SEE from the new baseline.
-
----
-
-## What the agent actually does
-
-The skill is opinionated about four things.
-
-**When to test vs. ship.** Conversion pages, headlines, offers, prices, CTAs, forms, checkouts, funnel structure, and *any AI-generated conversion copy* get tested. Bug fixes, typos, legal text and accessibility fixes ship directly. When unsure: could this plausibly move conversion enough that knowing is worth the traffic?
-
-**What to test first.** Offer → primary promise → CTA and conversion path → structure → trust → friction → imagery → micro-copy. Behavioural evidence overrides the list. ICE scores go in the test description so the owner can see the reasoning.
-
-**How to measure.** A strict goal hierarchy: revenue / order value → completed conversion → qualified lead → purchase intent → engagement. *A CTA click is not a sale.* If the purchase can be tracked, track the purchase — including cross-domain when the checkout lives somewhere else. Sub-goals explain *why*: clicks up 40% with purchases down 8% means the page over-promised.
-
-**How not to fool yourself.** Don't call a winner until AB Split Test's confidence is over 90% — ideally 95% — however far ahead one version looks today. Don't treat an emergency rollback as a result. Don't run tiny tests on low-traffic pages — only bold hypotheses reach confidence there. Don't re-run a disproved idea in a different colour.
-
-The full skill is ~1,900 words and reads in five minutes: [`skills/ab-split-test/SKILL.md`](skills/ab-split-test/SKILL.md).
+The fix isn't a smarter model. It's a feedback loop: show some visitors the old version and some the new one, measure what they actually do, keep the winner. These skills put that loop into the agent's normal workflow, so testing happens because the agent changed something that matters, not because someone remembered to ask.
 
 ---
 
 ## Install
 
-### Claude Code
+**Claude Code, as a plugin** (both skills):
+
+```bash
+/plugin marketplace add SiteSpot/human-web-feedback-loop
+/plugin install human-web-feedback-loop@human-web-feedback-loop
+```
+
+**Any skills folder:**
 
 ```bash
 git clone https://github.com/SiteSpot/human-web-feedback-loop.git
-cp -r human-web-feedback-loop/skills/ab-split-test ~/.claude/skills/
+cp -r human-web-feedback-loop/skills/* ~/.claude/skills/
 ```
 
-Or project-scoped: copy into `.claude/skills/` in the repo you're working in.
+**Codex, Cursor and other agents:** copy `skills/prove-website-changes/SKILL.md` into wherever your agent reads instructions (`AGENTS.md`, `.cursor/rules/`, a system prompt). Add the optimisation-loop skill and its `references/` folder if you want the full CRO workflow.
 
-### Codex / Cursor / other agents
-
-Copy `skills/ab-split-test/SKILL.md` wherever your agent loads instructions from (`AGENTS.md`, `.cursor/rules/`, a system prompt, a skills directory). The file is plain Markdown with a small YAML front-matter block; nothing else is required.
-
-### Connect the MCP server
-
-The skill calls AB Split Test's MCP tools (`absplittest/create-test`, `get-test-results`, `get-heatmap-data`, …). Add the server to your agent's MCP config — setup for each client is in the [AB Split Test API / MCP / CLI docs](https://absplittest.com/api-mcp-cli/).
-
-You need a WordPress site with [AB Split Test](https://absplittest.com) installed. The free tier is enough to try it; non-WordPress sites (Shopify, static, vibe-coded) can be tested through the plugin's split-test-server mode.
+Then connect a testing tool (see [below](#testing-tools)). Without one, the agent still tells you, once, when a change it made is untested.
 
 ---
 
-## Example
+## What changes when it's installed
 
-An agent is asked to "improve the booking page." With this skill loaded:
+You ask your agent to rewrite the homepage hero. Without the skill, it overwrites the hero. With it:
+
+> The new hero is set up as a draft A/B test against the current one, judged on completed bookings. Activate it when you're ready, or tell me to just publish it.
+
+That's it. The agent did the work you asked for, delivered it as a variation instead of a replacement, picked a goal closer to revenue than a click, and left the launch to you.
+
+It stays out of the way the rest of the time:
+- **Typos, bug fixes, accessibility, refactors** ship normally, with no mention of testing.
+- **Pages with too little traffic** to give an answer get the change shipped, with one line saying it's unproven.
+- **"Just publish it"** gets one sentence about the trade-off, then the agent publishes.
+
+---
+
+## The two skills
+
+| | [`prove-website-changes`](skills/prove-website-changes/SKILL.md) | [`website-optimisation-loop`](skills/website-optimisation-loop/SKILL.md) |
+|---|---|---|
+| **For** | Agents already editing a site | Someone asking to improve conversions |
+| **Triggers on** | Changing a headline, CTA, offer, pricing copy, form, checkout or landing page | "Improve conversions", "what should we test", "analyse the heatmaps", "keep optimising" |
+| **Does** | Ship, test, or flag as unproven. If testing, create a draft test instead of overwriting. | The full SEE → FIND → BUILD → PROVE → KEEP loop, with autonomy levels and validity checks |
+| **Size** | About 1,000 words, self-contained | About 1,100 words, plus references loaded only when needed |
+
+### The optimisation loop
 
 ```
-SEE    get-heatmap-data /book/ → 61% never reach the form; heavy clicks on the
-       (non-linked) price text. get-page-analytics → exits cluster before the form.
-
-FIND   Not a wording problem. Hypothesis: surfacing price framing + the booking
-       CTA above the fold will lift completed bookings. ICE 8/8/9 → 8.3
-
-BUILD  mode: magic. Primary goal: completed booking. Sub-goals: CTA click,
-       form start. Audience: logged-out + customers, admins excluded.
-       QA with ?abhash=1 on desktop + mobile. create-test → active.
-
-PROVE  Day 9: bookings +22% at 96% confidence. Clicks +40%, form starts
-       +31% — intermediate and final metrics agree, no over-promise.
-
-KEEP   Variation becomes baseline. Learned: earlier price clarity beat more
-       persuasive copy. Back to SEE — next bottleneck is probably the offer.
+        ┌──────────────────────────────────────────────┐
+        ▼                                              │
+      SEE ──────► FIND ──────► BUILD ──────► PROVE ──► KEEP
+   heatmaps,    hypothesis    variation,     real       winner = baseline;
+   analytics,   worth the     goal ≈ revenue, visitors,  loss = learned
+   past tests   traffic       guardrails     validated  constraint
 ```
 
-The owner gets: *"The price-led hero increased completed bookings ~22% with 96% confidence after 9 days."* Not a wall of statistics.
+Real visitor behaviour picks what to test. One hypothesis per test, not one element. Completed conversions and revenue matter more than clicks. Sub-goals explain results, and guardrails can veto a winner. Losses and inconclusive results are recorded as learnings, so the agent accumulates knowledge instead of guessing again.
+
+**Autonomy is explicit.** At level 1, the default, the owner approves each test. At level 2 the agent may launch tests in categories the owner named. At level 3 it runs successive rounds within approved boundaries. Price, payments, checkout logic and legal claims always need specific approval, and the agent can never raise its own level.
+
+**The platform decides.** The agent sets tests up so the verdict means something, checks validity, and reports the platform's verdict in plain words. It doesn't call winners from its own arithmetic or because one version is ahead.
+
+References, loaded on demand: [methodology](skills/website-optimisation-loop/references/methodology.md) · [statistics](skills/website-optimisation-loop/references/statistics.md) · [WordPress](skills/website-optimisation-loop/references/wordpress.md) · [Cloud](skills/website-optimisation-loop/references/cloud.md) · [worked example](skills/website-optimisation-loop/references/example-booking-page.md). How the two skills avoid overlapping: [docs/how-the-skills-fit.md](docs/how-the-skills-fit.md).
+
+---
+
+## Testing tools
+
+The skills work with any experimentation platform that an agent can reach over MCP or an API. They're written against AB Split Test, which is built for exactly this workflow:
+
+- **[AB Split Test for WordPress](https://absplittest.com).** Runs inside the WordPress install, with data in the site's own database and no traffic meter. The free Lite plugin on wordpress.org covers the core test tools over MCP. The paid plugin adds heatmaps for agents, revenue goals, audiences and automatic winner modes.
+- **[AB Split Test Cloud](https://absplittest.com/cloud/).** For any other site: Next.js, Astro, Webflow, Framer, Shopify themes, static HTML. One script tag, and the whole product is available as MCP tools. There's no dashboard; the agent is the interface. Signups open from the waitlist, starting with 100,000 free page views.
+
+Using Optimizely, Convert, Statsig, PostHog, GrowthBook, VWO or another platform? Connect its MCP server; the skills use whatever list, create, results and status tools are available.
+
+---
+
+## FAQ
+
+**Will my agent start asking whether to A/B test every edit?**
+No. Most edits ship normally. The agent only tests material changes to conversion-critical pages. When it does, it prepares the test as part of the work rather than asking first.
+
+**Will it launch tests on its own?**
+Not unless you give it standing permission for a category of change. By default it creates drafts and you activate them.
+
+**What if my site has very little traffic?**
+Small changes can't be judged on small traffic. The agent ships them and says they're unproven, or suggests a bolder change that a test could actually judge.
+
+**Does it only work with WordPress?**
+No. AB Split Test Cloud works on any site with a script tag, and the skills work with other platforms too.
+
+**Why does it care about revenue more than clicks?**
+A variation that gets more clicks and fewer purchases has over-promised. The agent measures the deepest conversion it can, and treats clicks as a clue about why.
 
 ---
 
 ## What's in the repo
 
 ```
-human-web-feedback-loop/
-├── skills/
-│   └── ab-split-test/
-│       └── SKILL.md        ← the skill. This is the whole product.
-├── README.md
-├── CONTRIBUTING.md
-└── LICENSE
+.claude-plugin/                       plugin and marketplace manifests
+skills/
+  prove-website-changes/SKILL.md      the developer skill
+  website-optimisation-loop/
+    SKILL.md                          the optimisation skill
+    references/                       methodology, statistics, WordPress, Cloud, example
+docs/
+  how-the-skills-fit.md               triggers, sharing, what's duplicated on purpose
+  mcp-recommendations.md              product changes that would make the skills more reliable
+  research-2026-10.md                 how the CRO platforms describe their loops, and sources
 ```
-
-One file does the work. Everything else is packaging.
-
----
-
-## FAQ
-
-**Does this only work with WordPress?**
-The MCP server runs on a WordPress install, but that install can act as a split-test server for any site — add the domain, drop in a script, and the agent can test a Shopify store or a static page the same way.
-
-**Will it slow the site / break caching / hurt SEO?**
-The plugin handles cache purging (WP Rocket, LiteSpeed, Autoptimize, Cloudflare, Bunny), sets canonical tags on variations, and serves full-page tests server-side or at the Cloudflare edge for zero flicker. The skill tells the agent *not* to touch caching itself.
-
-**What if the site doesn't have much traffic?**
-The skill's rule: on low-traffic pages, test only bold differences. Two nearly identical variations will rarely reach 90% confidence on a small site — that's a test-design problem, not a traffic problem. Heatmaps and the CRO audit still work at any traffic level.
-
-**Can the agent deploy winners on its own?**
-For low-risk content tests (headline, CTA text, section order) yes, if auto-complete is enabled. For price, checkout, forms, payment logic or legally meaningful claims, the skill defaults to owner review.
-
-**When does the agent call a winner?**
-When AB Split Test reports over 90% confidence — ideally 95% — and the test has run at least a full week. Until then it keeps collecting, stops the test, or redesigns for a bolder difference. It never just picks whichever version is ahead.
 
 ---
 
 ## Contributing
 
-Better heuristics, tighter wording, worked examples from real sites, ports to other testing tools — all welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-If you run this on a real site and it produces a decision, we'd love the anonymised story as an example.
-
----
+Better heuristics, tighter wording, real worked examples, notes for other platforms: all welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-[MIT](LICENSE). Built by the people behind [AB Split Test](https://absplittest.com) — eight years of WordPress split testing, 2,400+ sites, every caching setup you can imagine.
+[MIT](LICENSE). Built by the people behind [AB Split Test](https://absplittest.com).

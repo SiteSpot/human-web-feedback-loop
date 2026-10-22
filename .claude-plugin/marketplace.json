@@ -1,0 +1,14 @@
+{
+  "name": "human-web-feedback-loop",
+  "owner": {
+    "name": "AB Split Test",
+    "url": "https://absplittest.com"
+  },
+  "plugins": [
+    {
+      "name": "human-web-feedback-loop",
+      "source": "./",
+      "description": "Prove website changes on real visitors instead of shipping guesses, and run a safe optimisation loop when asked."
+    }
+  ]
+}
