@@ -49,6 +49,7 @@ Sources: wingify.com/wingz-ai, wingify.com/blog/agentic-ai-experimentation, docs
 | Default to overlapping tests; exclusive only when variants break each other | Eppo, "When should I use mutually exclusive experiments"; Statsig interaction detection; Kohavi et al. 2013 via Spotify Confidence RFP |
 | Evidence-scored prioritisation; one hypothesis; research-first | CXL, "A better way to prioritize A/B tests" (PXL); Speero prioritisation; CXL ResearchXL; Convert 2026 |
 | Same learning record for every test; iterate on winning levers | Wingify CRO documentation framework; Pedowitz Group; Booking.com arXiv 1710.08217 |
+| Reusable pattern and "apply to" fields in the learning record; heuristic cold-start page audit; plain-language triggers | Corey Haines, marketingskills (MIT): `ab-testing` experiment playbook and `cro` page analysis framework, reworded for this loop |
 | Flicker is a measurement error; QA goals, allocation, mobile, speed | Statsig flicker explainer; Kameleoon flicker article; Convert 2026 |
 | Gated autonomy: agent drafts, builds, checks, reports; human approves launch, winners, messy results | Convert 2026 survey; Optiphoenix 120-experiment agentic pilot; Optimizely Opal governance; Kohavi (Jan 2026) on LLMs multiplying ideas making power non-negotiable |
 

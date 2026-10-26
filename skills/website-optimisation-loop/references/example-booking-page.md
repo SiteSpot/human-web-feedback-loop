@@ -42,6 +42,8 @@ Sub-goals:   button clicks +40%, form starts +31%
 Guardrails:  booking value, cancellations, mobile rate: unchanged
 Decision:    deployed, owner approved
 Learned:     earlier price clarity beat more persuasive copy; the lever was structure
+Pattern:     visitors who hunt for the price convert more when it's above the fold
+Apply to:    service pages that link to /book/; the pricing section of the homepage
 Next:        test offer framing on the new baseline
 ```
 

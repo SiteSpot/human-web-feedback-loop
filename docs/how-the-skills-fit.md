@@ -7,9 +7,9 @@ The repo ships two skills that serve two different moments. They share a set of 
 | | `prove-website-changes` | `website-optimisation-loop` |
 |---|---|---|
 | **Moment** | An agent is already editing a website for some other reason | Someone explicitly asks for conversion optimisation |
-| **Triggers on** | Rewriting a headline, hero, CTA, offer, pricing copy, form, checkout or landing page; publishing AI-written conversion copy | "Improve conversions", "run CRO", "what should we test", "analyse the heatmaps", "how are our tests doing", "keep optimising" |
+| **Triggers on** | Rewriting a headline, hero, CTA, offer, pricing copy, form, checkout or landing page; publishing AI-written conversion copy | "Improve conversions", "this page isn't converting", "why aren't people signing up", "run CRO", "what should we test", a URL shared with "how do I get more sales from this", "analyse the heatmaps", "how are our tests doing", "keep optimising" |
 | **Doesn't trigger on** | Bug fixes, typos, refactors, pages with no conversion role | A one-off edit with no optimisation request |
-| **Length** | About 1,000 words, no references required | About 1,100 words, plus references loaded on demand |
+| **Length** | About 1,000 words, no references required | About 1,200 words, plus references loaded on demand |
 | **Job** | Decide in seconds: ship, test, or "worth it but too little traffic". If testing, deliver the work as a draft test instead of a replacement. | Run SEE → FIND → BUILD → PROVE → KEEP with autonomy levels, validity checks and learning records |
 | **Default action** | Prepare a draft test; get approval before it goes live; mention testing at most once per session when no tool exists | Agree the autonomy level first; level 1 approves each test |
 

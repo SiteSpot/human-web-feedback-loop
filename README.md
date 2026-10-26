@@ -67,9 +67,9 @@ It stays out of the way the rest of the time:
 | | [`prove-website-changes`](skills/prove-website-changes/SKILL.md) | [`website-optimisation-loop`](skills/website-optimisation-loop/SKILL.md) |
 |---|---|---|
 | **For** | Agents already editing a site | Someone asking to improve conversions |
-| **Triggers on** | Changing a headline, CTA, offer, pricing copy, form, checkout or landing page | "Improve conversions", "what should we test", "analyse the heatmaps", "keep optimising" |
+| **Triggers on** | Changing a headline, CTA, offer, pricing copy, form, checkout or landing page | "Improve conversions", "this page isn't converting", "what should we test", "analyse the heatmaps", "keep optimising" |
 | **Does** | Ship, test, or flag as unproven. If testing, create a draft test instead of overwriting. | The full SEE → FIND → BUILD → PROVE → KEEP loop, with autonomy levels and validity checks |
-| **Size** | About 1,000 words, self-contained | About 1,100 words, plus references loaded only when needed |
+| **Size** | About 1,000 words, self-contained | About 1,200 words, plus references loaded only when needed |
 
 ### The optimisation loop
 
