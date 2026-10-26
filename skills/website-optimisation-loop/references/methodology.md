@@ -20,7 +20,7 @@ A test that can't produce a decision wastes traffic.
 
 ## 1 · SEE
 
-**Existing experiments.** List active tests on the page and audience you're considering. Overlapping independent tests is usually fine; make tests mutually exclusive only when one variation would break or invalidate the other. Read completed tests and learnings so you don't re-run a disproved idea.
+**Existing experiments.** List active tests on the page and audience you're considering. Overlapping independent tests is usually fine; make tests mutually exclusive only when one variation would break or invalidate the other. Read completed tests and learnings so you don't re-run a disproved idea. Check recorded patterns whose *Apply to* names this page or page type: each one is a candidate with evidence behind it.
 
 **Behaviour.** Click and movement heatmaps, scroll depth, page analytics (entry, exit, journey), session replays, form analytics. Look for:
 - sections few visitors reach;
@@ -44,6 +44,26 @@ A test that can't produce a decision wastes traffic.
 
 **Traffic.** Write down weekly visitors and conversions for each candidate page now.
 
+### Cold start: no behaviour data yet
+
+A new site, a new page, or a site with no heatmaps or analytics gives you nothing to read. Don't stall, and don't pretend a heuristic is evidence. Audit the page the way a first-time visitor meets it, in this order:
+
+1. **Five seconds.** Can a cold visitor say what this is, who it's for and why they'd care, before scrolling?
+2. **Promise.** Is the headline a specific outcome, and does it match the ad, email or search result that sent the visitor?
+3. **Primary action.** Is there one obvious next step, visible without scrolling, whose wording says what the visitor gets?
+4. **Hierarchy.** Does a visitor who only scans still get the message? Is the most important thing the most prominent?
+5. **Proof.** Is there specific, attributed evidence (named reviews, numbers, logos) next to the claims and the action it supports?
+6. **Objections.** Are price, "will this work for me", effort and "what if it doesn't" answered where they come up, not only in an FAQ?
+7. **Friction.** Fields, steps, surprises, mobile layout, load time: what makes the action harder than it needs to be?
+
+Then sort what you found:
+
+- **Broken, not debatable** (a dead button, a form that fails on mobile, a missing price the visitor must have): fix it now. That's a bug, not a test.
+- **Plausible problems**: candidates for FIND. Score them **confidence 4 or lower**, because nobody has seen a visitor struggle yet.
+- **Recording**: switch on heatmaps, scroll maps and conversion tracking on the pages you audited, so the next round of SEE has behaviour to read.
+
+On a low-traffic site the audit's best use is choosing one bold test, not a list of small ones.
+
 ---
 
 ## 2 · FIND
@@ -54,7 +74,7 @@ A test that can't produce a decision wastes traffic.
 
 **ICE, 1–10 each, averaged:**
 - *Impact*: if correct, how far does the primary business metric move?
-- *Confidence*: how much evidence? Current-site behaviour, funnel data, repeated objections and prior tests score high. Heuristics and intuition score low. A competitor doing it is an idea source, not confidence.
+- *Confidence*: how much evidence? Current-site behaviour, funnel data, repeated objections and prior tests score high. A pattern recorded from a test elsewhere on this site sits in between: proven here, but not on this page. Heuristics, cold-start audit findings and intuition score low. A competitor doing it is an idea source, not confidence.
 - *Ease*: build time, breakage risk, QA, dependencies.
 
 Record the scores and reasoning in the test description. Don't run a low-impact test because it's easy: traffic spent proving something trivial can't prove something important.
@@ -142,9 +162,13 @@ Sub-goals:   what moved and what didn't
 Guardrails:  status
 Segments:    declared segments that disagreed with the overall result (exploratory)
 Decision:    shipped / kept original / no decision, and who approved
-Learned:     the principle, in one sentence
+Learned:     what this test showed, in one sentence
+Pattern:     the reusable rule, worded so it could hold beyond this page
+Apply to:    other pages, page types or flows where the pattern might hold
 Next:        the test this suggests
 ```
+
+**Pattern** and **Apply to** are what let one win compound across a site. A losing or inconclusive test can still record a pattern (*urgency raises clicks, not purchases*). Leave Pattern empty rather than overstate a one-off. A pattern is a reason to test elsewhere, not proof it will work there: carry it into FIND as a candidate and test it on the new page.
 
 **Deploying winners.** Only as the autonomy level allows. Low-risk content can be deployed automatically where the owner has granted it. Price, checkout, forms, payment logic, custom code, external systems and legal claims need owner approval for the specific deployment.
 

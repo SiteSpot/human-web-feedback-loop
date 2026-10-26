@@ -1,6 +1,6 @@
 ---
 name: website-optimisation-loop
-description: Use when someone explicitly asks you to improve a website's conversions, run CRO, find what to test, analyse heatmaps or test results, run continuous or autonomous experiments, or keep optimising a site over time. Runs the SEE → FIND → BUILD → PROVE → KEEP loop with real visitor behaviour as the evidence, explicit autonomy levels, and statistical validity checks. Works with AB Split Test (WordPress or Cloud) or any experimentation platform. For a one-off website edit that might affect conversions, use prove-website-changes instead.
+description: Use when someone asks you to improve a website's conversions or work out why a page isn't working, in whatever words they use ("this page isn't converting", "why aren't people signing up", "nobody's buying", "my landing page sucks", "run CRO", "what should we test"), or shares a URL and asks how to get more sales, signups or bookings from it. Also use to analyse heatmaps or test results, or to run continuous or autonomous experiments that keep optimising a site over time. Runs the SEE → FIND → BUILD → PROVE → KEEP loop with real visitor behaviour as the evidence, explicit autonomy levels, and statistical validity checks. Works with AB Split Test (WordPress or Cloud) or any experimentation platform. For a one-off website edit that might affect conversions, use prove-website-changes instead.
 ---
 
 # The website optimisation loop
@@ -39,8 +39,9 @@ Ask the owner which level they want, record it, and work within it. **Never rais
 
 ## SEE — read the evidence first
 
-- List active and completed tests, and read past learnings, so you don't collide with a running test or re-run a disproved idea.
+- List active and completed tests, and read past learnings, so you don't collide with a running test or re-run a disproved idea. A recorded pattern whose *Apply to* names this page is a ready-made candidate.
 - Read behaviour: heatmaps, scroll depth, page analytics, session replays, form drop-off. Add support questions and customer objections if you have them.
+- **No behaviour data yet** (new site, no heatmaps, analytics just installed): run the cold-start audit in methodology.md. Its findings are heuristics, so they score low on confidence. Fix outright breakage now, and get recording switched on so the next round has evidence.
 - Note each candidate page's weekly visitors and conversions. That decides how bold a test must be.
 - Let behaviour choose the lever. Nobody reaches the CTA: test position, not wording. Clicks on something unclickable: unmet intent. Many CTA clicks, few purchases: the problem is downstream.
 
@@ -74,7 +75,7 @@ Ask the owner which level they want, record it, and work within it. **Never rais
 - **Variation wins:** it becomes the baseline; the next test starts from it.
 - **Original wins:** record the constraint learned. That's a result, not a failure.
 - **Inconclusive:** the most common outcome. Record it; next time go bolder, measure deeper, or pick a page with more traffic.
-- Record every test the same way: hypothesis, evidence, change, result, sub-goals, guardrails, decision, next idea.
+- Record every test the same way: hypothesis, evidence, change, result, sub-goals, guardrails, decision, what it showed, the reusable pattern and where else it might apply, next idea.
 - Report in the owner's words: *"The price-led hero is very likely better for completed bookings (98% probability after three weeks); best estimate +22%, order value unchanged."*
 - Back to SEE on the new baseline.
 
